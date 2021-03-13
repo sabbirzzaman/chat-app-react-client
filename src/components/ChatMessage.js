@@ -1,19 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ChatMessage() {
+function ChatMessage({ text, name, image, timestamp }) {
     return (
         <Container>
             <Avater>
-                <img src="https://avatars.githubusercontent.com/u/76956355?s=460&v=4" alt="Avater"/>
+                <img src={image} alt="Avater"/>
             </Avater>
             <MessageContainer>
                 <Name>
-                    John Doe
-                    <span>12:17 PM</span>
+                    {name}
+                    <span>{new Date(timestamp.toDate()).toUTCString()}</span>
                 </Name>
                 <Text>
-                    Slack App First Message
+                    {text}
                 </Text>
             </MessageContainer>
         </Container>

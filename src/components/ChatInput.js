@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import FormatBoldIcon from '@material-ui/icons/FormatBold';
 import SendIcon from "@material-ui/icons/Send";
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
-function ChatInput() {
+function ChatInput({ sendMessage }) {
+
+  const [input, setInput] = useState('');
+
+  const send = (e) => {
+    e.preventDefault();
+    if(!input) return;
+    sendMessage(input)
+  }
+
   return (
     <Container>
       <InputContainer>
@@ -13,13 +22,13 @@ function ChatInput() {
             <FormatBoldIcon />
           </InputStyle>
 
-          <input type="text" placeholder="Type a message" />
+          <input type="submit" onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Type a message" />
 
           <AttachFile>
             <AttachFileIcon />
           </AttachFile>
 
-          <SendButton>
+          <SendButton onClick={send} >
             <SendIcon />
           </SendButton>
         </form>
@@ -81,7 +90,7 @@ const AttachFile = styled.div`
     border-radius: 4px;
 
     :hover {
-      background: #465EFC;
+      background: #1264a3;
       color: #FFFFFF;
       transition: .3s;
     }
@@ -96,22 +105,27 @@ const InputStyle = styled.div`
     border-radius: 4px;
 
     :hover {
-      background: #465EFC;
+      background: #1264a3;
       color: #FFFFFF;
       transition: .3s;
     }
 `
 
-const SendButton = styled.div`
+const SendButton = styled.button`
     margin-right: 10px;
     cursor: pointer;
     color: #FFFFFF;
     display: flex;
     align-content: center;
-    background: #465EFC;
+    background: #1264a3;
     border-radius: 4px;
     padding: 5px;
+    border: none;
 
     :hover {
+    }
+    
+    :focus {
+      outline: none;
     }
 `;

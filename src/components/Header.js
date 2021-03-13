@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 
-function Login(props) {
+function Login({user, signOut}) {
   return (
     <Container>
       <Main>
@@ -20,10 +20,10 @@ function Login(props) {
 
       <UserContainer>
         <Name>
-          {props.user.name}
+          {user.name}
         </Name>
-        <UserImage>
-          <img src={props.user.photo}/>
+        <UserImage onClick={signOut}>
+          <img src={user.photo ? user.photo : 'https://i.imgur.com/6VBx3io.png'}/>
         </UserImage>
       </UserContainer>
     </Container>
@@ -33,13 +33,13 @@ function Login(props) {
 export default Login;
 
 const Container = styled.div`
-    background: #3b53ed;
+    background: #19496e;
     color: #EBE7EB;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    // box-shadow: 0 1px 0 0 rgb(255 255 255 / 10%);
+    box-shadow: 0 1px 0 0 rgb(255 255 255 / 10%);
 `;
 
 const Main = styled.div`
@@ -60,7 +60,7 @@ const SearchContainer = styled.div`
 `;
 
 const Search = styled.div`
-    background-color: #6375e9bd;
+    background-color: #3d7199;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     width: 100%;
     border-radius: 4px;
@@ -70,23 +70,21 @@ const Search = styled.div`
     input {
       width: 100%;
       border: none;
-      background: transparent;
+      background: #1264a3;
+      border-radius: 4px;
       padding: 4px 8px;
       color: #FFFFFF;
     }
     
     input:focus {
       outline: none;
-      border-radius: 4px;
-      background: #6375e9bd;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      background: #3d7199;
     }
     
     input:hover {
       cursor: pointer;
-      background: #6375e9bd;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-      border-radius: 4px;
+      background: #3d7199;
+      transition: .3s;
     }
 
     input::placeholder {
@@ -109,6 +107,7 @@ const Name = styled.div`
 const UserImage = styled.div`
     width: 28px;
     height: 28px;
+    cursor: pointer;
     
     img {
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

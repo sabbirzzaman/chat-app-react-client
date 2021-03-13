@@ -4,8 +4,18 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { SidebarItems } from '../data/SidebarData'
 import AddIcon from '@material-ui/icons/Add';
 import db from '../firebase';
+import { useHistory } from "react-router-dom";
 
 function Sidebar(props) {
+
+    const history = useHistory();
+
+    const goToChannel = (id) => {
+        if(id) {
+            console.log(id);
+            history.push(`/room/${id}`);
+        }
+    }
 
     const addChannel = () => {
         const promptName = prompt('Enter Channel Name.');
@@ -47,7 +57,7 @@ function Sidebar(props) {
                 <ChannelsList>
                     {
                         props.rooms.map( item =>(
-                            <Channel>
+                            <Channel onClick={() => goToChannel(item.id)}>
                                 # {item.name}
                             </Channel>
                         ))
@@ -61,7 +71,7 @@ function Sidebar(props) {
 export default Sidebar
 
 const Container = styled.div`
-    background: #465EFC;
+    background: #1264a3;
 `
 const WorkspaceContainer = styled.div`
     height: 64px;
@@ -72,7 +82,7 @@ const WorkspaceContainer = styled.div`
     padding-right: 16px;
     justify-content: space-between;
     :hover {
-        background: #3b53ed;
+        background: #19496e;
         transition: .3s;
     }
 `
@@ -110,7 +120,7 @@ const MainChannelItem = styled.div`
     padding-left: 16px;
     cursor: pointer;
     :hover {
-        background: #3b53ed;
+        background: #19496e;
         transition: .3s;
     }
 
@@ -142,7 +152,7 @@ const NewChennelItens = styled.div`
         border-radius: 4px;
     }
     svg:hover {
-        background: #3b53ed;
+        background: #19496e;
         transition: .3s;
     }
 `
@@ -160,7 +170,7 @@ const Channel = styled.div`
     align-items: center;
     cursor: pointer;
     :hover {
-        background: #3b53ed;
+        background: #19496e;
         transition: .3s;
     }
 
