@@ -11,7 +11,8 @@ function ChatInput({ sendMessage }) {
   const send = (e) => {
     e.preventDefault();
     if(!input) return;
-    sendMessage(input)
+    sendMessage(input);
+    setInput('');
   }
 
   return (
@@ -22,7 +23,7 @@ function ChatInput({ sendMessage }) {
             <FormatBoldIcon />
           </InputStyle>
 
-          <input type="submit" onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Type a message" />
+          <input value={input} type="submit" onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Type a message" />
 
           <AttachFile>
             <AttachFileIcon />
@@ -44,6 +45,7 @@ const Container = styled.div`
     padding-right: 20px;
     padding-left: 20px;
     padding-bottom: 24px;
+    padding-top: 10px;
 `;
 
 const InputContainer = styled.div`
