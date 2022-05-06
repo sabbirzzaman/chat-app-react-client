@@ -23,7 +23,7 @@ function Login(props) {
         <Container>
             <Content>
                 <SlackLogo src="https://i.imgur.com/oHhRbZ1.png" />
-                <h1>Sign In Slack To Slack</h1>
+                <h1>Sign In To Slack</h1>
                 <SignInButton onClick = { () => signIn() }>
                     Sign in With Google
                 </SignInButton>
