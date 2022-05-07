@@ -1,30 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { auth, provider } from '../firebase';
 import logo from '../images/logo.svg';
 import bg from '../images/bg.jpg';
 
-function Login(props) {
-    const signIn = () => {
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                const newUser = {
-                    name: result.user.displayName,
-                    photo: result.user.photoURL,
-                };
-                localStorage.setItem('user', JSON.stringify(newUser));
-                props.setUser(newUser);
-            })
-            .catch((error) => {
-                alert(error.message);
-            });
-    };
-
+function Login() {
     return (
         <Container>
             <Content>
                 <SlackLogo src={logo} />
-                <SignInButton onClick={() => signIn()}>
+                <SignInButton>
                     Continue with google
                 </SignInButton>
             </Content>
@@ -63,11 +47,11 @@ const Content = styled.div`
 `;
 
 const SlackLogo = styled.img`
-    width: 120px;
+    width: 100px;
     position: absolute;
     top: -20px;
     background: #ffffffe0;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

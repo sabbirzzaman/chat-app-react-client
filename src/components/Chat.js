@@ -1,65 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ChatInput from './ChatInput'
-import ChatMessage from './ChatMessage'
-import db from '../firebase'
-import { useParams } from "react-router-dom";
-import firebase from 'firebase'
 
 function Chat({ user }) {
-
-    let { channelId } = useParams()
-
-    const [channel, setChannel] = useState([]);
-    const [messages, setMessages] = useState([]);
-
-    const getMessage = () => {
-        db.collection('room')
-        .doc(channelId)
-        .collection('messages')
-        .orderBy('timestamp', 'asc')
-        .onSnapshot((snapShot)=>{
-            let messages = snapShot.docs.map((doc)=>doc.data());
-            console.log(messages)
-            setMessages(messages);
-        })
-    }
-
-    const sendMessage = (text) => {
-        if(channelId) {
-            let payload = {
-                text: text, 
-                timestamp: firebase.firestore.Timestamp.now(),
-                user: user.name, 
-                userImage: user.photo,
-            }
-            db.collection('room').doc(channelId).collection('messages').add(payload);
-        }
-    }
-
-    const getChannel = () => {
-        db.collection('room')
-        .doc(channelId)
-        .onSnapshot((snapShot)=>{
-            setChannel(snapShot.data());
-        })
-    }
-
-    useEffect (()=>{
-        getChannel();
-        getMessage();
-    }, [channelId])
-
-
     return (
         <Container>
             <Header>
                 <Channel>
                     <ChannelName>
-                        # {channel.name}
                         <StarBorderIcon />
                     </ChannelName>
                     <ChannelInfo>
@@ -74,19 +25,9 @@ function Chat({ user }) {
             </Header>
 
             <ChatArea>
-                {
-                    messages.length > 0 &&
-                    messages.map((data, index)=>(
-                        <ChatMessage 
-                        text={data.text}
-                        name={data.user}
-                        image={data.userImage}
-                        timestamp={data.timestamp}
-                        />
-                    ))
-                }
+                
             </ChatArea>
-            <ChatInput sendMessage={sendMessage} />
+            <ChatInput/>
         </Container>
     )
 }

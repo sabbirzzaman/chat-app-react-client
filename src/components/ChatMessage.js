@@ -1,19 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ChatMessage({ text, name, image, timestamp }) {
+function ChatMessage() {
     return (
         <Container>
-            <Avater>
-                <img src={image} alt="Avater"/>
-            </Avater>
+            <Avatar>
+                <img src={''} alt="Avater"/>
+            </Avatar>
             <MessageContainer>
                 <Name>
-                    {name}
-                    <span>{new Date(timestamp.toDate()).toUTCString()}</span>
+                    <span>Hello 2</span>
                 </Name>
                 <Text>
-                    {text}
+                    Hello
                 </Text>
             </MessageContainer>
         </Container>
@@ -32,7 +31,7 @@ const Container = styled.div`
     }
 `
 
-const Avater = styled.div`
+const Avatar = styled.div`
     width: 36px;
     height: 36px;
     border-radius: 2px;

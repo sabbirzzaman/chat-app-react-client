@@ -1,31 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import { SidebarItems } from '../data/SidebarData'
 import AddIcon from '@material-ui/icons/Add';
-import db from '../firebase';
-import { useHistory } from "react-router-dom";
 
-function Sidebar(props) {
-
-    const history = useHistory();
-
-    const goToChannel = (id) => {
-        if(id) {
-            console.log(id);
-            history.push(`/room/${id}`);
-        }
-    }
-
-    const addChannel = () => {
-        const promptName = prompt('Enter Channel Name.');
-        if(promptName){
-            db.collection('room').add({
-                name: promptName
-            })
-        }
-    }
-
+function Sidebar() {
     return (
         <Container>
             <WorkspaceContainer>
@@ -38,32 +16,19 @@ function Sidebar(props) {
             </WorkspaceContainer>
 
             <MainChannels>
-                {
-                    SidebarItems.map( item => (
-                        <MainChannelItem>
-                            {item.icon}
-                            {item.text}
-                        </MainChannelItem>
-                    ))
-                }
+                
             </MainChannels>
 
-            <ChannelConteiner>
-                <NewChennelItens>
+            <ChannelContainer>
+                <NewChannelItems>
                     <div>Channel</div>
-                    <AddIcon onClick={addChannel} />
-                </NewChennelItens>
+                    <AddIcon />
+                </NewChannelItems>
 
                 <ChannelsList>
-                    {
-                        props.rooms.map( item =>(
-                            <Channel onClick={() => goToChannel(item.id)}>
-                                # {item.name}
-                            </Channel>
-                        ))
-                    }
+                    
                 </ChannelsList>
-            </ChannelConteiner>
+            </ChannelContainer>
         </Container>
     )
 }
@@ -129,16 +94,16 @@ const MainChannelItem = styled.div`
     }
 `
 
-const ChannelConteiner = styled.div`
+const ChannelContainer = styled.div`
     color: #FFFFFF;
     margin-top: 10px;
 `
 
-const NewChennelItens = styled.div`
+const NewChannelItems = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    heignt: 28px;
+    height: 28px;
     padding-left: 16px;
     padding-right: 16px;
 

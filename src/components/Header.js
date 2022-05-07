@@ -3,7 +3,7 @@ import styled from "styled-components";
 import AccessTimeIcon from "@material-ui/icons/AccessTime";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 
-function Login({user, signOut}) {
+function Login() {
   return (
     <Container>
       <Main>
@@ -20,10 +20,10 @@ function Login({user, signOut}) {
 
       <UserContainer>
         <Name>
-          {user.name}
+          Name
         </Name>
-        <UserImage onClick={signOut}>
-          <img src={user.photo ? user.photo : 'https://i.imgur.com/6VBx3io.png'}/>
+        <UserImage>
+          <img src={'https://i.imgur.com/6VBx3io.png'} alt="" />
         </UserImage>
       </UserContainer>
     </Container>

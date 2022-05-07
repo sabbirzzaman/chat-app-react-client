@@ -5,16 +5,6 @@ import SendIcon from "@material-ui/icons/Send";
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
 function ChatInput({ sendMessage }) {
-
-  const [input, setInput] = useState('');
-
-  const send = (e) => {
-    e.preventDefault();
-    if(!input) return;
-    sendMessage(input);
-    setInput('');
-  }
-
   return (
     <Container>
       <InputContainer>
@@ -23,13 +13,13 @@ function ChatInput({ sendMessage }) {
             <FormatBoldIcon />
           </InputStyle>
 
-          <input value={input} type="submit" onChange={(e)=>setInput(e.target.value)} type="text" placeholder="Type a message" />
+          <input type="text" placeholder="Type a message" />
 
           <AttachFile>
             <AttachFileIcon />
           </AttachFile>
 
-          <SendButton onClick={send} >
+          <SendButton>
             <SendIcon />
           </SendButton>
         </form>
