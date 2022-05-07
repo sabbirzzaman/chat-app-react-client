@@ -1,88 +1,91 @@
-import React from 'react'
-import styled from 'styled-components'
-import { auth, provider } from '../firebase'
+import React from 'react';
+import styled from 'styled-components';
+import { auth, provider } from '../firebase';
+import logo from '../images/logo.svg';
+import bg from '../images/bg.jpg';
 
 function Login(props) {
-
     const signIn = () => {
         auth.signInWithPopup(provider)
-        .then((result) => {
-            const newUser = {
-                name : result.user.displayName,
-                photo : result.user.photoURL
-            }
-            localStorage.setItem('user', JSON.stringify(newUser));
-            props.setUser(newUser);
-        })
-        .catch((error)=>{
-            alert(error.message)
-        })
-    }
+            .then((result) => {
+                const newUser = {
+                    name: result.user.displayName,
+                    photo: result.user.photoURL,
+                };
+                localStorage.setItem('user', JSON.stringify(newUser));
+                props.setUser(newUser);
+            })
+            .catch((error) => {
+                alert(error.message);
+            });
+    };
 
     return (
         <Container>
             <Content>
-                <SlackLogo src="https://i.imgur.com/oHhRbZ1.png" />
-                <h1>Sign In To Slack</h1>
-                <SignInButton onClick = { () => signIn() }>
-                    Sign in With Google
+                <SlackLogo src={logo} />
+                <SignInButton onClick={() => signIn()}>
+                    Continue with google
                 </SignInButton>
             </Content>
         </Container>
-    )
+    );
 }
 
-export default Login
+export default Login;
 
 const Container = styled.div`
+    background-image: url(${bg});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     width: 100%;
     height: 100vh;
-    background: #f8f8f8;
     display: flex;
     justify-content: center;
     align-items: center;
-`
+`;
 
 const Content = styled.div`
-    background: #FFFFFF;
-    padding: 100px;
-    border-radius: 8px;
-    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.8px);
+    -webkit-backdrop-filter: blur(9.8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 300px;
+    height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    h1 {
-        margin-top: 20px;
-    }
-`
+    border-radius: 10px;
+    position: relative;
+`;
 
 const SlackLogo = styled.img`
-    width: 100px;
-    background: #1264a3;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-`
+    width: 120px;
+    position: absolute;
+    top: -20px;
+    background: #ffffffe0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+`;
 
 const SignInButton = styled.button`
-    cursor: pointer;
-    margin-top: 50px;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: 400;
-    text-transform: uppercase;
-    background: #1264a3;
+    background-color: #4749a1;
     border: none;
-    border-radius: 4px;
-    color: #FFFFFF;
+    padding: 8px 30px;
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: capitalize;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
 
     :hover {
-        background: #19496e;
+        background-color: #1c1e4f;
     }
-
-    :focus {
-        outline: none;
-    }
-`
+`;

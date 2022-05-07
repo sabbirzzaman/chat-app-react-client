@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Chat from "./components/Chat";
 import Login from "./components/Login";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import db from "./firebase";
-import { auth } from "./firebase";
+import { auth, provider } from "./firebase";
 
 function App() {
   const [rooms, setRooms] = useState([]);
@@ -54,7 +54,7 @@ function App() {
                 </Route>
                 <Route path="/">
                   <AppRoot>
-                    <img className="Logo-spin" src="https://i.imgur.com/oHhRbZ1.png" />
+                    <img className="Logo-spin" src="https://i.imgur.com/oHhRbZ1.png" alt="" />
                     <RootHeading>Create Or Explore Channel</RootHeading>
                   </AppRoot>
                 </Route>
